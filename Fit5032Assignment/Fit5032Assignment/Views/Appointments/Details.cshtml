@@ -1,0 +1,55 @@
+﻿@model Fit5032Assignment.Models.Appointment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Appointment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Appointment_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Appointment_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Appointment_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Appointment_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Patient.F_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patient.F_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor.F_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doctor.F_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Appointment_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+    @if (User.IsInRole("Staff") || User.IsInRole("Doctor"))
+    {
+        @Html.ActionLink("Send Email", "Send_Email", "Home");
+    }
+</p>

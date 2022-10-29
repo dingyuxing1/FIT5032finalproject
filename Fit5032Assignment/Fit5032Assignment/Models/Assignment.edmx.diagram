@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5f2b482627e0409ebc8b96689803fca6" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.AspNetUserRoles" Width="1.5" PointX="11" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Patient" Width="1.5" PointX="5.625" PointY="2.75" />
+        <EntityTypeShape EntityType="Model.Doctor" Width="1.5" PointX="5.625" PointY="6.875" />
+        <EntityTypeShape EntityType="Model.Appointment" Width="1.5" PointX="7.875" PointY="2.75" />
+        <AssociationConnector Association="Model.PatientAppointment" />
+        <AssociationConnector Association="Model.DoctorAppointment" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" />
+    <EntitySet Name="PatientSet" EntityType="Model.Patient" />
+    <EntitySet Name="DoctorSet" EntityType="Model.Doctor" />
+    <EntitySet Name="AppointmentSet" EntityType="Model.Appointment" />
+    <AssociationSet Name="PatientAppointment" Association="Model.PatientAppointment">
+      <End Role="Patient" EntitySet="PatientSet" />
+      <End Role="Appointment" EntitySet="AppointmentSet" />
+    </AssociationSet>
+    <AssociationSet Name="DoctorAppointment" Association="Model.DoctorAppointment">
+      <End Role="Doctor" EntitySet="DoctorSet" />
+      <End Role="Appointment" EntitySet="AppointmentSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="Patient_id" />
+    </Key>
+    <Property Name="Patient_id" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="None" />
+    <Property Name="F_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="L_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Appointment" Relationship="Model.PatientAppointment" FromRole="Patient" ToRole="Appointment" />
+  </EntityType>
+  <EntityType Name="Doctor">
+    <Key>
+      <PropertyRef Name="Doctor_Id" />
+    </Key>
+    <Property Name="Doctor_Id" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="None" />
+    <Property Name="F_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="L_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Appointment" Relationship="Model.DoctorAppointment" FromRole="Doctor" ToRole="Appointment" />
+  </EntityType>
+  <EntityType Name="Appointment">
+    <Key>
+      <PropertyRef Name="Appointment_Id" />
+    </Key>
+    <Property Name="Appointment_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Appointment_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Appointment_time" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="PatientPatient_id" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DoctorDoctor_Id" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Patient" Relationship="Model.PatientAppointment" FromRole="Appointment" ToRole="Patient" />
+    <NavigationProperty Name="Doctor" Relationship="Model.DoctorAppointment" FromRole="Appointment" ToRole="Doctor" />
+  </EntityType>
+  <Association Name="PatientAppointment">
+    <End Type="Model.Patient" Role="Patient" Multiplicity="1" />
+    <End Type="Model.Appointment" Role="Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Patient_id" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="PatientPatient_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DoctorAppointment">
+    <End Type="Model.Doctor" Role="Doctor" Multiplicity="1" />
+    <End Type="Model.Appointment" Role="Appointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="Doctor_Id" />
+      </Principal>
+      <Dependent Role="Appointment">
+        <PropertyRef Name="DoctorDoctor_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

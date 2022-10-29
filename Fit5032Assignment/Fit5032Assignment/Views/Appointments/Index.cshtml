@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Fit5032Assignment.Models.Appointment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Appoinment Date")
+            @*Html.DisplayNameFor(model => model.Appointment_date)*@
+        </th>
+        <th>
+            @Html.Label("Time")
+            @*Html.DisplayNameFor(model => model.Appointment_time)*@
+        </th>
+        <th>
+            @Html.Label("Patient Name")
+            @*Html.DisplayNameFor(model => model.Patient.F_name)*@
+        </th>
+        <th>
+            @Html.Label("Doctor Name")
+            @*Html.DisplayNameFor(model => model.Doctor.F_name)*@
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Appointment_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Appointment_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient.F_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Doctor.F_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Appointment_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Appointment_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Appointment_Id })
+        </td>
+    </tr>
+}
+
+</table>
